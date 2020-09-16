@@ -18,7 +18,18 @@ namespace kiralnyok
         }
         public void megjelenit()
         {
-
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    Console.Write(T[i,j] + " ");
+                }
+                Console.WriteLine();
+                
+            }
+            Console.WriteLine();
+            
+            
         }
 
 
@@ -55,8 +66,10 @@ namespace kiralnyok
     {
         static void Main(string[] args)
         {
-            //Tabla t = new Tabla();
-            
+            Tabla t = new Tabla('#');
+            Console.WriteLine("Üres tábla");
+            t.megjelenit();
+                    
             
 
             Console.ReadKey();
