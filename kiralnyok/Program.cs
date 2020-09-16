@@ -12,8 +12,22 @@ namespace kiralnyok
         private char UresOszlopSzam;
         private char UresSorokSzama;
         private char[,] T ;
-        public void elhelyezes()
+        public void elhelyezes(int N)
         {
+            //Véletlen helyiérték létrehozása:
+            // - Random osztály értékkészlet: [0,7]
+            // - Véletlen sor és oszlop
+            // - Elhelyezzük a k-t;
+            // - HA ÜRES -> "#"
+            Random r = new Random();
+            int sor = r.Next(0, 8);
+            int oszlop = r.Next(0, 8);
+            T[sor, oszlop] = 'K';
+            if (T[sor,oszlop] == '#')
+            {
+                T[sor, oszlop] = 'k';
+            }
+
 
         }
         public void megjelenit()
@@ -69,6 +83,10 @@ namespace kiralnyok
             Tabla t = new Tabla('#');
             Console.WriteLine("Üres tábla");
             t.megjelenit();
+            t.elhelyezes(1);
+            Console.WriteLine();
+            t.megjelenit();
+
                     
             
 
