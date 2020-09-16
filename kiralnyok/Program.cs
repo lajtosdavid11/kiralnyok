@@ -21,6 +21,7 @@ namespace kiralnyok
 
         }
 
+
         public Tabla(char ch)
         {
             T = new char[8, 8];
