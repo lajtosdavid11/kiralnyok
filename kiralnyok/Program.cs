@@ -11,7 +11,8 @@ namespace kiralnyok
         private char UresCella;
         private char UresOszlopSzam;
         private char UresSorokSzama;
-        private char[,] T ;
+        private char[,] t ;
+        
         public void elhelyezes(int N)
         {
             //Véletlen helyiérték létrehozása:
@@ -19,13 +20,24 @@ namespace kiralnyok
             // - Véletlen sor és oszlop
             // - Elhelyezzük a k-t;
             // - HA ÜRES -> "#"
-            Random r = new Random();
-            int sor = r.Next(0, 8);
-            int oszlop = r.Next(0, 8);
-            T[sor, oszlop] = 'K';
-            if (T[sor,oszlop] == '#')
+            Console.Write("Hány királynő legyen: ");
+            
+
+            Random rnd = new Random();
+
+            for (int i = 0; i < N; i++)
             {
-                T[sor, oszlop] = 'k';
+                bool igaz = true;
+                while (igaz)
+                {
+                    int sor = rnd.Next(0, 8);
+                    int oszlop = rnd.Next(0, 8);
+                    if (t[sor, oszlop] == '#')
+                    {
+                        t[sor, oszlop] = 'K';
+                        igaz = false;
+                    }
+                }
             }
 
 
@@ -36,7 +48,7 @@ namespace kiralnyok
             {
                 for (int j = 0; j < 8; j++)
                 {
-                    Console.Write(T[i,j] + " ");
+                    Console.Write(t[i,j] + " ");
                 }
                 Console.WriteLine();
                 
@@ -49,13 +61,13 @@ namespace kiralnyok
 
         public Tabla(char ch)
         {
-            T = new char[8, 8];
+            t = new char[8, 8];
             UresCella = ch;
             for (int i = 0; i < 8; i++)
             {
                 for (int j = 0; j < 8; j++)
                 {
-                    T[i, j] = UresCella;
+                    t[i, j] = UresCella;
                 }
             }
         }
@@ -83,7 +95,7 @@ namespace kiralnyok
             Tabla t = new Tabla('#');
             Console.WriteLine("Üres tábla");
             t.megjelenit();
-            t.elhelyezes(1);
+            t.elhelyezes(64);
             Console.WriteLine();
             t.megjelenit();
 
