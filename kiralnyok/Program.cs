@@ -37,8 +37,10 @@ namespace kiralnyok
                         t[sor, oszlop] = 'K';
                         igaz = false;
                     }
+
                 }
             }
+
 
 
         }
@@ -71,13 +73,46 @@ namespace kiralnyok
                 }
             }
         }
-        public int Uresoszlopok()
+        public bool Uresoszlopok(int oszlop)
         {
-            return 0;
+            int i = 0;
+            
+            
+            while (i<8 && t[i,oszlop] != 'K')
+            {
+                
+                i++;
+            }
+            if (i < 8 )
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+            
+
+
         }
-        public int uressor()
+        public bool uressor(int sor)
         {
-            return 0;
+            int i = 0;
+
+
+            while (i < 8 && t[sor,i] != 'K')
+            {
+
+                i++;
+            }
+            if (i < 8)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         public void fajlbair()
@@ -95,12 +130,49 @@ namespace kiralnyok
             Tabla t = new Tabla('#');
             Console.WriteLine("Üres tábla");
             t.megjelenit();
-            t.elhelyezes(64);
+            t.elhelyezes(5);
             Console.WriteLine();
             t.megjelenit();
+            Console.WriteLine("Melyik sor?");
+            int sor = int.Parse(Console.ReadLine());
+            int oszlop = int.Parse(Console.ReadLine());
+            if (t.uressor(sor))
+            {
+                Console.WriteLine("A megadott sor üres");
+            }
+            else
+            {
+                Console.WriteLine("A megadott sor nem üres");
+            }
+            if (t.Uresoszlopok(oszlop))
+            {
+                Console.WriteLine("A megadott oszlop üres");
+            }
+            else
+            {
+                Console.WriteLine("A megadott oszlop nem üres");
+            }
 
-                    
-            
+            Console.WriteLine("Az üres oszlopok és sorok száma:");
+            int uresSor = 0;
+            int uresOszlop = 0;
+            for (int i = 0; i < 8; i++)
+            {
+                if (t.Uresoszlopok(i) == true)
+                {
+                    uresOszlop++;
+                }
+                if (t.uressor(i) == true)
+                {
+                    uresSor++;
+                }
+            }
+            Console.WriteLine("Üres sorok száma: {0}",uresSor);
+            Console.WriteLine("Üres oszlopok száma:{0}",uresOszlop);
+
+
+
+
 
             Console.ReadKey();
         }
