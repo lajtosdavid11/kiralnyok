@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace kiralnyok
 {
@@ -20,7 +21,7 @@ namespace kiralnyok
             // - Véletlen sor és oszlop
             // - Elhelyezzük a k-t;
             // - HA ÜRES -> "#"
-            Console.Write("Hány királynő legyen: ");
+            //Console.Write("Hány királynő legyen: ");
             
 
             Random rnd = new Random();
@@ -32,7 +33,7 @@ namespace kiralnyok
                 {
                     int sor = rnd.Next(0, 8);
                     int oszlop = rnd.Next(0, 8);
-                    if (t[sor, oszlop] == '#')
+                    if (t[sor, oszlop] == UresCella)
                     {
                         t[sor, oszlop] = 'K';
                         igaz = false;
@@ -115,8 +116,21 @@ namespace kiralnyok
             }
         }
 
-        public void fajlbair()
+        public void fajlbair(StreamWriter fajl)
         {
+            fajl.WriteLine("Ez egy szöveg");
+
+            for (int i = 0; i < 8; i++)
+            {
+                string sor = "";
+                for (int j = 0; j < 8; j++)
+                {
+                    sor += t[i, j];
+                }
+                fajl.WriteLine(sor);
+            }
+            
+
 
         }
 
@@ -128,9 +142,16 @@ namespace kiralnyok
         static void Main(string[] args)
         {
             Tabla t = new Tabla('#');
+
+            Tabla[] tablak = new Tabla[64];
+            
+
+
+
+
             Console.WriteLine("Üres tábla");
             t.megjelenit();
-            t.elhelyezes(5);
+            t.elhelyezes(1);
             Console.WriteLine();
             t.megjelenit();
             Console.WriteLine("Melyik sor?");
@@ -170,8 +191,23 @@ namespace kiralnyok
             Console.WriteLine("Üres sorok száma: {0}",uresSor);
             Console.WriteLine("Üres oszlopok száma:{0}",uresOszlop);
 
+            
+            StreamWriter sw = new StreamWriter("adatok.txt");
+            for (int i = 0; i < tablak.Length; i++)
+            {
+                tablak[i] = new Tabla('*');
+            }
+
+            for (int i = 0; i < 64; i++)
+            {
+                tablak[i].elhelyezes(i + 1);
+                tablak[i].fajlbair(sw);
+                sw.WriteLine();
+            }
 
 
+            t.fajlbair(sw);
+            sw.Close();
 
 
             Console.ReadKey();
